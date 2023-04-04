@@ -1,7 +1,8 @@
+mod plugins;
+
 use futures::prelude::*;
 use irc::client::prelude::*;
-mod plugins;
-use plugins::{common::Plugin, remember::RememberPlugin, lta_query::LTAQuery};
+use plugins::{common::Plugin, remember::RememberPlugin, lta_query::LTAQueryPlugin};
 
 #[tokio::main]
 async fn main() -> irc::error::Result<()> {
@@ -19,8 +20,8 @@ async fn main() -> irc::error::Result<()> {
     let mut stream = client.stream()?;
 
     let mut plugins: [Box<dyn Plugin>; 2] = [
-        Box::new(RememberPlugin::new("/root/memo.txt", &client).await),
-        Box::new(LTAQuery::new("ZKybqazFSJSEmg/AnIBuiQ==", &client).await),
+        Box::new(RememberPlugin::new("/root/memo.txt", &client).await),           // todo
+        Box::new(LTAQueryPlugin::new("ZKybqazFSJSEmg/AnIBuiQ==", &client).await), // todo
     ];
 
     while let Some(message) = stream.next().await.transpose()? {

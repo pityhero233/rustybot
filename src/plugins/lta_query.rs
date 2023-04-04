@@ -4,15 +4,16 @@ use irc::client::Client as IRCClient;
 use std::error::Error;
 use async_trait::async_trait;
 use chrono::{Utc, FixedOffset};
+
 /// LTAQuery plugin returns bus arrival information on query.
 /// syntax: bus [station_id] [bus_id]
-pub struct LTAQuery<'a> {
+pub struct LTAQueryPlugin<'a> {
     lta_client: LTAClient,
     irc_client: &'a IRCClient
 }
 
 #[async_trait]
-impl<'a> Plugin for LTAQuery<'a> {
+impl<'a> Plugin for LTAQueryPlugin<'a> {
     async fn process(&mut self, _target: &String, msg: &String) -> Result<(), Box<dyn Error>>{
         let splitted: Vec<&str> = msg.split(' ').collect();
         if splitted.len() == 0 || (splitted.len() == 1 && splitted[0] != "bus") {
@@ -32,7 +33,6 @@ impl<'a> Plugin for LTAQuery<'a> {
                         if let Some(r) = e {
                             let arrival_time = r.est_arrival;
                             let curr_time = Utc::now().with_timezone(&FixedOffset::east_opt(8 * 3600).unwrap()); // TODO proper
-                            println!("{arrival_time}, {curr_time}");
                             let d = (arrival_time - curr_time).num_minutes();
                             self.send(_target, &format!("{0} => {1}th bus comes in {d} minutes.", idx + 1, idx2 + 1))?;
                         }
@@ -49,9 +49,9 @@ impl<'a> Plugin for LTAQuery<'a> {
     }
 }
 
-impl<'a> LTAQuery<'a> {
-    pub async fn new(api: &str, irc: &'a IRCClient) -> LTAQuery<'a> { // time?
+impl<'a> LTAQueryPlugin<'a> {
+    pub async fn new(api: &str, irc: &'a IRCClient) -> LTAQueryPlugin<'a> { // time?
         let cli = lta::Client::with_api_key(api).expect("api key verify error");
-        LTAQuery {lta_client: cli, irc_client: &irc}
+        LTAQueryPlugin {lta_client: cli, irc_client: &irc}
     }
 }
