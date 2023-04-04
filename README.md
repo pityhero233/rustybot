@@ -1,9 +1,9 @@
 # rustybot
-IRC bot in rust to help with blackberry daily needs. 
+tiny IRC bot in rust to help with blackberry daily needs. 
 
-This app is intended to be ran on a Raspberry Pi.
+This app is intended to be run on a Raspberry Pi.
 
-Bonus point if run with matterbridge.
+Bonus point if ran with matterbridge.
 
 ## Done
 * Connect to IRC
@@ -15,3 +15,6 @@ Bonus point if run with matterbridge.
 * Integrate with org-agenda
 * Security: IRC channel password lock, TLS
 * Availibility: Auto reconnect after connection lost
+
+## Probably ...
+* ChatGPT integration 
