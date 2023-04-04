@@ -1,5 +1,5 @@
 # rustybot
-tiny IRC bot in rust to help with blackberry daily needs. 
+tiny rust irc bot to help with blackberry daily needs. 
 
 This app is intended to be run on a Raspberry Pi.
 
