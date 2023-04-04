@@ -1,7 +1,9 @@
 # rustybot
 IRC bot in rust to help with blackberry daily needs. 
+
 This app is intended to be ran on a Raspberry Pi.
 
+Bonus point if run with matterbridge.
 
 ## Done
 * Connect to IRC
