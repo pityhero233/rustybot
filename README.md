@@ -1,13 +1,15 @@
 # rustybot
-IRC bot in rust to help with blackberry daily needs. This app is intended to run on a Raspberry Pi.
+IRC bot in rust to help with blackberry daily needs. 
+This app is intended to be ran on a Raspberry Pi.
 
 
 ## Done
 * Connect to IRC
 * Query LTA for realtime bus arrival
-* Todo items that sync to raspberry pi
+* Sync todo item to raspberry pi
 
 ## TODO
+* New features: Weather auto alert, RSS feed bridging, Wolfram Alpha computing, remote note retrieval
+* Integrate with org-agenda
 * Security: IRC channel password lock, TLS
 * Availibility: Auto reconnect after connection lost
-* New features: Weather auto alert, RSS feed bridging, Wolfram Alpha computing, remote note retrieval etc.
