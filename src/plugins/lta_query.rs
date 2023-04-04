@@ -17,7 +17,7 @@ impl<'a> Plugin for LTAQuery<'a> {
         let splitted: Vec<&str> = msg.split(' ').collect();
         if splitted.len() == 0 || (splitted.len() == 1 && splitted[0] != "bus") {
 
-        } else if splitted.len() != 2 {
+        } else if splitted.len() != 3 {
             self.send(_target, "invalid amount of arguments")?;
         } else {
             let stop_code: u32 = splitted[1].parse::<u32>()?;
@@ -32,8 +32,9 @@ impl<'a> Plugin for LTAQuery<'a> {
                         if let Some(r) = e {
                             let arrival_time = r.est_arrival;
                             let curr_time = Utc::now().with_timezone(&FixedOffset::east_opt(8 * 3600).unwrap()); // TODO proper
+                            println!("{arrival_time}, {curr_time}");
                             let d = (arrival_time - curr_time).num_minutes();
-                            self.send(_target, &format!("{idx}: {idx2}th bus comes in {d} minutes."))?;
+                            self.send(_target, &format!("{0} => {1}th bus comes in {d} minutes.", idx + 1, idx2 + 1))?;
                         }
                     }
                 }

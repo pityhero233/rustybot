@@ -19,7 +19,7 @@ async fn main() -> irc::error::Result<()> {
     let mut stream = client.stream()?;
 
     let mut plugins: [Box<dyn Plugin>; 2] = [
-        Box::new(RememberPlugin::new("/home/xade/memo", &client).await),
+        Box::new(RememberPlugin::new("/root/memo.txt", &client).await),
         Box::new(LTAQuery::new("ZKybqazFSJSEmg/AnIBuiQ==", &client).await),
     ];
 
